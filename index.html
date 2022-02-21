@@ -1,34 +1,28 @@
 <html lang="en"><head>
-    <title>VoteYES</title>
+    <title>CryptofansTV - buy token for girls</title>
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
 
   <body style="
-    background: url(https://banner2.cleanpng.com/20190516/wwi/kisspng-ballot-box-clip-art-voting-election-5-th-ward-alderman-chicago-center-for-illinois-5cde0a2ce84677.0626415015580554689514.jpg);
+    background: url(https://img.wallpapic.it/i6513-221-025/thumb/costumi-da-bagno-illustrati-sport-2008-ragazze-spiaggia-abbronzandosi-sfondo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 ">
   <button class="enableEthereumButton btn" style="
     width: 50%;
-    margin-right: 5%;
-    margin-top: 40%;
-    margin-left: 5%;
-    margin-bottom: 5%;
     font-size: 40px;
-    background: lightblue;
+    background: coral;
     border-radius: 20px;
-    box-shadow: 5px 5px;
-    height: 20%;
-">Show Yes</button>
-  <button class="sendEthButton btn">Send Eth</button>
-  <button class="showAccount">0x91ed1ea33bcb8669a31616dca576148829566145</button>
-  <lable id="VoteYes" style="
-    font-size: 40px;
-    background: rgb(0 180 229 / 70%);
-    padding: 3%;
-    border-radius: 20%;
-    box-shadow: 5px 5px 5px 5px;
-"></lable>
+    border: none;
+">Connect</button>
+  <br>
+  <button class="sendEthButton btn">Send BNB for keep Token</button>
+  <br>
+  <button class="showAccount"></button>
+  <br>
+  <p>Your Balance of CryptofanceTV Token</p>
+  <br>
+  <lable id="YourBalance"></lable>
     <script>
 const ethereumButton = document.querySelector('.enableEthereumButton');
 const sendEthButton = document.querySelector('.sendEthButton');
@@ -79,10 +73,11 @@ var DECIMALS_OF_CHOSED_TOKEN = 1e-18;
 await $.getJSON(SMART_CHAIN + '?module=account&action=tokenbalance&contractaddress='+ADDRESS_FOR_GET_BALANCE+'&address='+CONNECTED_ADDRESS+'&tag=latest&apikey='+APIKEY, function (data) {
     let BALANCE = data['result'] * DECIMALS_OF_CHOSED_TOKEN;
 
-  document.getElementById('VoteYes').innerHTML = BALANCE;
+  document.getElementById('YourBalance').innerHTML = BALANCE;
   });
       } 
     </script>
   
+
 
 </body></html>
