@@ -11,24 +11,55 @@
  <br>
  <br>
   <button class="enableEthereumButton btn" style="
-    width: 50%;
+    width: 100%;
     font-size: 40px;
     background: coral;
     border-radius: 20px;
     border: none;
+    text-align: center;
 ">Connect</button>
   <br>
   <br>
-  <button class="sendEthButton btn">Send BNB for keep Token</button>
+  <button class="sendEthButton btn" style="
+    width: 100%;
+    font-size: 40px;
+    background: gold;
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+">Send BNB for keep Token</button>
   <br>
   <br>
-  <button class="showAccount"></button>
+  <button class="showAccount" style="
+    width: 100%;
+    font-size: 40px;
+    background: #2196f3;
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+"></button>
   <br>
   <br>
-  <p>Your Balance of CryptofanceTV Token</p>
+  <p style="
+    width: 100%;
+    font-size: 40px;
+    background: aquamarine;
+    border-radius: 20px;
+    border: none;
+    padding: 5px;
+    text-align: center;
+">Your Balance of CryptofanceTV Token</p>
   <br>
   <br>
-  <lable id="YourBalance"></lable>
+  <lable id="YourBalance" style="
+    width: 100%;
+    font-size: 40px;
+    background: aquamarine;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    text-align: center;
+"></lable>
     <script>
 const ethereumButton = document.querySelector('.enableEthereumButton');
 const sendEthButton = document.querySelector('.sendEthButton');
@@ -84,6 +115,7 @@ await $.getJSON(SMART_CHAIN + '?module=account&action=tokenbalance&contractaddre
       } 
     </script>
   
+
 
 
 </body></html>
