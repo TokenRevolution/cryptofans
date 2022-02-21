@@ -1,51 +1,92 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
-  <div>
-    <button class="pay-button">Pay</button>
-    <div id="status"></div>
-  </div>
-  <script type="text/javascript">
-    window.addEventListener('load', async () => {
-      if (window.ethereum) {
-        window.web3 = new Web3(ethereum);
-        try {
-          await ethereum.enable();
-          initPayButton()
-        } catch (err) {
-          $('#status').html('User denied account access', err)
-        }
-      } else if (window.web3) {
-        window.web3 = new Web3(web3.currentProvider)
-        initPayButton()
-      } else {
-        $('#status').html('No Metamask (or other Web3 Provider) installed')
-      }
+<html lang="en"><head>
+    <title>VoteYES</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body style="
+    background: url(https://banner2.cleanpng.com/20190516/wwi/kisspng-ballot-box-clip-art-voting-election-5-th-ward-alderman-chicago-center-for-illinois-5cde0a2ce84677.0626415015580554689514.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+">
+  <button class="enableEthereumButton btn" style="
+    width: 50%;
+    margin-right: 5%;
+    margin-top: 40%;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    font-size: 40px;
+    background: lightblue;
+    border-radius: 20px;
+    box-shadow: 5px 5px;
+    height: 20%;
+">Show Yes</button>
+  <button class="sendEthButton btn" style="
+    display: none;
+">Send Eth</button>
+  <button class="showAccount" style="
+    display: none;
+">0x91ed1ea33bcb8669a31616dca576148829566145</button>
+  <lable id="VoteYes" style="
+    font-size: 40px;
+    background: rgb(0 180 229 / 70%);
+    padding: 3%;
+    border-radius: 20%;
+    box-shadow: 5px 5px 5px 5px;
+"></lable>
+    <script>
+const ethereumButton = document.querySelector('.enableEthereumButton');
+const sendEthButton = document.querySelector('.sendEthButton');
+const showAccount = document.querySelector('.showAccount');
+
+let accounts = [];
+
+//Sending Ethereum to an address
+sendEthButton.addEventListener('click', () => {
+  ethereum
+    .request({
+      method: 'eth_sendTransaction',
+      params: [
+        {
+          from: accounts[0],
+          to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
+          value: '0x29a2241af62c0000',
+          gasPrice: '0x09184e72a000',
+          gas: '0x2710',
+        },
+      ],
     })
+    .then((txHash) => console.log(txHash))
+    .catch((error) => console.error);
+});
 
-    const initPayButton = () => {
-      $('.pay-button').click(() => {
-        // paymentAddress is where funds will be send to
-        const paymentAddress = '0x192c96bfee59158441f26101b2db1af3b07feb40'
-        const amountEth = 1
+ethereumButton.addEventListener('click', () => {
+  getAccount();
+});
 
-        web3.eth.sendTransaction({
-          to: paymentAddress,
-          value: web3.toWei(amountEth, 'ether')
-        }, (err, transactionId) => {
-          if  (err) {
-            console.log('Payment failed', err)
-            $('#status').html('Payment failed')
-          } else {
-            console.log('Payment successful', transactionId)
-            $('#status').html('Payment successful')
-          }
-        })
-      })
+async function getAccount() {
+  accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+  const account = accounts[0];
+  showAccount.innerHTML = account;
+       try {
+     handleNewAccounts(account);
+    } catch (err) {
+      console.error('Error on init when getting accounts', err);
     }
-  </script>
-</body>
-</html>
+}
+async function handleNewAccounts(newAccounts)
+      {    
+var SMART_CHAIN = "https://api.bscscan.com/api";
+var ADDRESS_FOR_GET_BALANCE = "0x645678db11ca50dc86b980b5cdbcd74c43e499bd";
+var CONNECTED_ADDRESS = newAccounts;
+var APIKEY = "XHQ5VW16JQQBUESG69IBVACI83KEDAAMC2";
+var DECIMALS_OF_CHOSED_TOKEN = 1e-18;
+await $.getJSON(SMART_CHAIN + '?module=account&action=tokenbalance&contractaddress='+ADDRESS_FOR_GET_BALANCE+'&address='+CONNECTED_ADDRESS+'&tag=latest&apikey='+APIKEY, function (data) {
+    let BALANCE = data['result'] * DECIMALS_OF_CHOSED_TOKEN;
+
+  document.getElementById('VoteYes').innerHTML = BALANCE;
+  });
+      } 
+    </script>
+  
+
+</body></html>
